@@ -117,7 +117,8 @@ func main() {
 	public_key=c4c8e984c5322c8184c72265b92b250fdb63688705f504ba003c88f03393cf28
 	allowed_ip=0.0.0.0/0
 	endpoint=127.0.0.1:58120`
-	*/if err := device.IpcSet(cfg); err != nil {
+	*/
+	if err := device.IpcSet(cfg); err != nil {
 		device.Close()
 		os.Exit(ExitSetupFailed)
 	}

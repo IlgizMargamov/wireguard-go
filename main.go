@@ -8,6 +8,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"os/signal"
@@ -223,7 +224,29 @@ func main() {
 	}
 
 	device := device.NewDevice(tdev, conn.NewDefaultBind(), logger)
+	private_key_134 := "e8bf9434607d58e871ac085b6dcea57ba186dbccc9d3582f334514ff65ac8e48" //hex.EncodeToString(src)
+	public_key_134 := "388c8529007a5406cd096abd871905fda3cda82b2940cd7d6f9cdff4ddcf8929"  //hex.EncodeToString(src)
+	enpoint_134 := "134.122.47.142:5353"
 
+	cfg := uapiCfg(
+		"private_key", private_key_134,
+		//"listen_port", "0",
+		//"replace_peers", "true",
+		"public_key", public_key_134, //hex.EncodeToString(pub2[:]),
+		//"protocol_version", "1",
+		//"replace_allowed_ips", "true",
+		"allowed_ip", "0.0.0.0/0",
+		"endpoint", enpoint_134,
+	)
+	if err := device.IpcSet(cfg); err != nil {
+		device.Close()
+		os.Exit(ExitSetupFailed)
+	}
+	if err := device.Up(); err != nil {
+		logger.Errorf("Failed to bring up device: %v", err)
+		device.Close()
+		os.Exit(ExitSetupFailed)
+	}
 	logger.Verbosef("Device started")
 
 	errs := make(chan error)
@@ -265,4 +288,20 @@ func main() {
 	device.Close()
 
 	logger.Verbosef("Shutting down")
+}
+
+func uapiCfg(cfg ...string) string {
+	if len(cfg)%2 != 0 {
+		panic("odd number of args to uapiReader")
+	}
+	buf := new(bytes.Buffer)
+	for i, s := range cfg {
+		buf.WriteString(s)
+		sep := byte('\n')
+		if i%2 == 0 {
+			sep = '='
+		}
+		buf.WriteByte(sep)
+	}
+	return buf.String()
 }
