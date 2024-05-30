@@ -53,7 +53,7 @@ const (
 )
 
 const (
-	MessageInitiationType  = 1
+	MessageInitiationType  = 41
 	MessageResponseType    = 2
 	MessageCookieReplyType = 3
 	MessageTransportType   = 4
