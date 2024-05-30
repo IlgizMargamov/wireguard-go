@@ -224,22 +224,23 @@ func main() {
 	}
 
 	device := device.NewDevice(tdev, conn.NewDefaultBind(), logger)
-	/*private_key_134 := "e8bf9434607d58e871ac085b6dcea57ba186dbccc9d3582f334514ff65ac8e48" //hex.EncodeToString(src)
+	private_key_134 := "e8bf9434607d58e871ac085b6dcea57ba186dbccc9d3582f334514ff65ac8e48" //hex.EncodeToString(src)
 	public_key_134 := "388c8529007a5406cd096abd871905fda3cda82b2940cd7d6f9cdff4ddcf8929"  //hex.EncodeToString(src)
 	enpoint_134 := "134.122.47.142:5353"
-	*/private_key_5 := "10bd3cfcbcbff74bfd9e86a5d6728a542cb646124ad637406492aba953931e76" //hex.EncodeToString(src)
+
+	/*private_key_5 := "10bd3cfcbcbff74bfd9e86a5d6728a542cb646124ad637406492aba953931e76" //hex.EncodeToString(src)
 	public_key_5 := "81c1a30a2316582fa1ff99ef583f0ae474e082e213fff6bd680874d3dcdf0315"    //hex.EncodeToString(src)
 	enpoint_5 := "5.181.252.167:5353"
-
+	*/
 	cfg := uapiCfg(
-		"private_key", private_key_5,
+		"private_key", private_key_134,
 		//"listen_port", "0",
 		//"replace_peers", "true",
-		"public_key", public_key_5, //hex.EncodeToString(pub2[:]),
+		"public_key", public_key_134, //hex.EncodeToString(pub2[:]),
 		//"protocol_version", "1",
 		//"replace_allowed_ips", "true",
 		"allowed_ip", "0.0.0.0/0",
-		"endpoint", enpoint_5,
+		"endpoint", enpoint_134,
 	)
 	if err := device.IpcSet(cfg); err != nil {
 		logger.Errorf("Failed to set up device: %v", err)
