@@ -198,6 +198,7 @@ func (device *Device) SendHandshakeCookie(initiatingElem *QueueHandshakeElement)
 }
 
 func (peer *Peer) keepKeyFreshSending() {
+	peer.device.log.Verbosef("Send")
 	keypair := peer.keypairs.Current()
 	if keypair == nil {
 		return

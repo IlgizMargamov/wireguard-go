@@ -173,8 +173,10 @@ func (peer *Peer) String() string {
 func (peer *Peer) Start() {
 	// should never start a peer on a closed device
 	if peer.device.isClosed() {
+		peer.device.log.Verbosef("Device closed")
 		return
 	}
+	peer.device.log.Verbosef("Set up device")
 
 	// prevent simultaneous start/stop operations
 	peer.state.Lock()
@@ -198,6 +200,7 @@ func (peer *Peer) Start() {
 	peer.device.queue.encryption.wg.Add(1) // keep encryption queue open for our writes
 
 	peer.timersStart()
+	peer.device.log.Verbosef("Timers started")
 
 	device.flushInboundQueue(peer.queue.inbound)
 	device.flushOutboundQueue(peer.queue.outbound)
