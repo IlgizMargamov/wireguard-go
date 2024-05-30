@@ -130,7 +130,7 @@ func main() {
 		}
 
 		file := os.NewFile(uintptr(fd), "")
-		return tun.CreateTUNFromFile(file, device.DefaultMTU)
+		return tun.CreateTUNFromFile(file, device.DefaultMTU)*/
 	}()
 
 	if err == nil {
