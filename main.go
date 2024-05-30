@@ -239,9 +239,12 @@ func main() {
 		"endpoint", enpoint_134,
 	)
 	if err := device.IpcSet(cfg); err != nil {
+		logger.Errorf("Failed to set up device: %v", err)
 		device.Close()
 		os.Exit(ExitSetupFailed)
 	}
+	logger.Verbosef("Set up device")
+
 	if err := device.Up(); err != nil {
 		logger.Errorf("Failed to bring up device: %v", err)
 		device.Close()

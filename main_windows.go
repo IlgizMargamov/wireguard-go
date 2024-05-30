@@ -77,7 +77,6 @@ func main() {
 	pub1, pub2 := key1.publicKey(), key2.publicKey()
 	fmt.Println(pub1)
 	fmt.Println(pub2)
-	bind := conn.NewDefaultBind()
 	//src := key1[:]
 	private_key_134 := "e8bf9434607d58e871ac085b6dcea57ba186dbccc9d3582f334514ff65ac8e48" //hex.EncodeToString(src)
 	public_key_134 := "388c8529007a5406cd096abd871905fda3cda82b2940cd7d6f9cdff4ddcf8929"  //hex.EncodeToString(src)
@@ -103,6 +102,7 @@ func main() {
 		"protocol_version", "1",
 		"replace_allowed_ips", "true",
 		"allowed_ip", "1.0.0.2/32")*/
+	bind := conn.NewDefaultBind()
 
 	device := device.NewDevice(tun, bind, logger)
 	/*if len(cfg) > 0 {
