@@ -98,14 +98,14 @@ func main() {
 	// get log level (default: info)
 
 	logLevel := func() int {
-		switch os.Getenv("LOG_LEVEL") {
+		/*switch os.Getenv("LOG_LEVEL") {
 		case "verbose", "debug":
 			return device.LogLevelVerbose
 		case "error":
 			return device.LogLevelError
 		case "silent":
 			return device.LogLevelSilent
-		}
+		}*/
 		return device.LogLevelVerbose
 	}()
 
